@@ -1,14 +1,14 @@
 package com.example.chatapp.Model;
 
-public class Chat {
+public class  Chat {
     private String sender;
     private String receiver;
-    private String meassage;
+    private String message;
 
-    public Chat(String sender, String receiver, String meassage) {
+    public Chat(String sender, String receiver, String message) {
         this.sender = sender;
         this.receiver = receiver;
-        this.meassage = meassage;
+        this.message = message;
     }
 
     public Chat() {
@@ -30,11 +30,11 @@ public class Chat {
         this.receiver = receiver;
     }
 
-    public String getMeassage() {
-        return meassage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMeassage(String meassage) {
-        this.meassage = meassage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

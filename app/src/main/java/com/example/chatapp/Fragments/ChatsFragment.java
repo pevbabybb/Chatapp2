@@ -126,15 +126,15 @@ public class ChatsFragment extends Fragment {
                             mUsers.add(user);
                             break;
 
-                        }
 
+                        }
                     }
+
 
                 }
 
                 userAdapter = new UserAdapter(getContext(), mUsers,true);
                 recyclerView.setAdapter(userAdapter);
-
 
             }
 

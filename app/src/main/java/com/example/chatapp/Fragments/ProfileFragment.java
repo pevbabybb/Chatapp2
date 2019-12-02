@@ -83,7 +83,6 @@ public class ProfileFragment extends Fragment {
                     image_profile.setImageResource(R.mipmap.ic_launcher);
                 }else{
                     Glide.with(getContext()).load(user.getImage_URL()).into(image_profile);
-
                 }
             }
 
@@ -151,7 +150,7 @@ public class ProfileFragment extends Fragment {
 
                         pd.dismiss();
                     }else{
-                        Toast.makeText(getContext(), "Faild!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Failed!", Toast.LENGTH_SHORT).show();
                         pd.dismiss();
                     }
 
@@ -179,7 +178,8 @@ public class ProfileFragment extends Fragment {
 
             if (uploadTask != null && uploadTask.isInProgress()){
                 Toast.makeText(getContext(), "Upload in progress", Toast.LENGTH_SHORT).show();
-            }else{
+            }else
+                {
                 uploadImage();
             }
         }

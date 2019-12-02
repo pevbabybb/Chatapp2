@@ -124,6 +124,7 @@ public class ChatsFragment extends Fragment {
                         if (user.getId().equals(id)) {
 
                             mUsers.add(user);
+                            break;
 
                         }
 

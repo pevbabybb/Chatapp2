@@ -146,7 +146,7 @@ public class ProfileFragment extends Fragment {
 
                         reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
                         HashMap<String, Object> map = new HashMap<>();
-                        map.put("imageUrl", mUri);
+                        map.put("image_URL", mUri);
                         reference.updateChildren(map);
 
                         pd.dismiss();
@@ -170,10 +170,10 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode,  Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == IMAGE_REQUEST && requestCode == RESULT_OK
+        if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK
         && data != null && data.getData() != null){
             imageUri = data.getData();
 

@@ -83,7 +83,6 @@ public class ProfileFragment extends Fragment {
                     image_profile.setImageResource(R.mipmap.ic_launcher);
                 }else{
                     Glide.with(getContext()).load(user.getImage_URL()).into(image_profile);
-
                 }
             }
 
@@ -146,12 +145,12 @@ public class ProfileFragment extends Fragment {
 
                         reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
                         HashMap<String, Object> map = new HashMap<>();
-                        map.put("imageUrl", mUri);
+                        map.put("image_URL", mUri);
                         reference.updateChildren(map);
 
                         pd.dismiss();
                     }else{
-                        Toast.makeText(getContext(), "Faild!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Failed!", Toast.LENGTH_SHORT).show();
                         pd.dismiss();
                     }
 
@@ -173,13 +172,14 @@ public class ProfileFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == IMAGE_REQUEST && requestCode == RESULT_OK
+        if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK
         && data != null && data.getData() != null){
             imageUri = data.getData();
 
             if (uploadTask != null && uploadTask.isInProgress()){
                 Toast.makeText(getContext(), "Upload in progress", Toast.LENGTH_SHORT).show();
-            }else{
+            }else
+                {
                 uploadImage();
             }
         }

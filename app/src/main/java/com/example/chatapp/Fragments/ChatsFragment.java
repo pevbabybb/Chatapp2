@@ -124,6 +124,7 @@ public class ChatsFragment extends Fragment {
                         if (user.getId().equals(id)) {
 
                             mUsers.add(user);
+                            break;
 
                         }
 
@@ -131,7 +132,7 @@ public class ChatsFragment extends Fragment {
 
                 }
 
-                userAdapter = new UserAdapter(getContext(), mUsers);
+                userAdapter = new UserAdapter(getContext(), mUsers,true);
                 recyclerView.setAdapter(userAdapter);
 
 

@@ -51,7 +51,6 @@ public class UsersFragment extends Fragment {
 
         mUsers = new ArrayList<>();
         ReadUsers();
-
         search_users = view.findViewById(R.id.search_users);
         search_users.addTextChangedListener(new TextWatcher() {
             @Override
@@ -76,7 +75,7 @@ public class UsersFragment extends Fragment {
     private void searchUsers(String s){
         final FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
         Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("search")
-                .startAt(s)
+                .startAt (s)
                 .endAt(s+"\uf8ff");
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -111,32 +110,30 @@ public class UsersFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(search_users.getText().toString().equals("")){
+                if (search_users.getText().toString().equals("")) {
 
-                mUsers.clear();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    User user = snapshot.getValue(User.class);
-                    if (user.getId() != null) {
-                        if (!user.getId().equals(firebaseUser.getUid())) {
-                            mUsers.add(user);
+                    mUsers.clear();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        User users = snapshot.getValue(User.class);
+                        if (users.getId() != null) {
+                            if (!users.getId().equals(firebaseUser.getUid())) {
+                                mUsers.add(users);
+                            }
                         }
                     }
 
+                        userAdapter = new UserAdapter(getContext(), mUsers, false);
+                        recyclerView.setAdapter(userAdapter);
 
-                    }
+
                 }
-
-                userAdapter = new UserAdapter(getContext(), mUsers,false);
-                recyclerView.setAdapter(userAdapter);
-
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+
     }
 
 }

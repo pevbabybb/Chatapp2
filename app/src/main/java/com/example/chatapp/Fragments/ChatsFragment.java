@@ -42,6 +42,8 @@ public class ChatsFragment extends Fragment {
 
     private List<String> usersList;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -121,6 +123,7 @@ public class ChatsFragment extends Fragment {
                     for (String id : usersList) {
 
                         assert user != null;
+
                         if (user.getId().equals(id)) {
 
                             mUsers.add(user);

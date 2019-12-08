@@ -69,7 +69,7 @@ public class Main2Activity extends AppCompatActivity {
                 if (user.getImage_URL() == null || user.getImage_URL().equals("default")) {
                     profile_image.setImageResource(R.mipmap.ic_launcher);
                 } else {
-                    Glide.with(Main2Activity.this).load(user.getImage_URL()).into(profile_image);
+                    Glide.with(getApplicationContext()).load(user.getImage_URL()).into(profile_image);
                 }
 
             }
@@ -164,5 +164,8 @@ public class Main2Activity extends AppCompatActivity {
         super.onPause();
         status("offline");
         }
+
+
+
     }
 

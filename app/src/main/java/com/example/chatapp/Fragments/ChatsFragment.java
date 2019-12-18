@@ -70,7 +70,7 @@ public class ChatsFragment extends Fragment {
                    Chatlist chatList = snapshot.getValue(Chatlist.class);
                    usersList.add(chatList);
                 }
-                mychatlist();
+                chatlist();
             }
 
             @Override
@@ -82,7 +82,7 @@ public class ChatsFragment extends Fragment {
         return view;
     }
 
-    private void mychatlist(){
+    private void chatlist(){
         mUsers = new ArrayList<>();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {

@@ -18,14 +18,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.chatapp.Adapter.MessageAdapter;
+import com.example.chatapp.Fragments.APIService;
 import com.example.chatapp.Model.Chat;
 import com.example.chatapp.Model.User;
+import com.example.chatapp.Notifications.Client;
+import com.example.chatapp.Notifications.Data;
+import com.example.chatapp.Notifications.MyResponse;
+import com.example.chatapp.Notifications.Sender;
+import com.example.chatapp.Notifications.Token;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
@@ -34,6 +41,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MessageActivity extends AppCompatActivity {
 
@@ -55,6 +65,9 @@ public class MessageActivity extends AppCompatActivity {
     ValueEventListener seenListener;
 
     boolean notify = false;
+    String userid;
+
+    APIService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +84,8 @@ public class MessageActivity extends AppCompatActivity {
                 startActivity(new Intent(MessageActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
+
+        apiService = Client.getClient("https://fcm.googleapis.com").create(APIService.class);
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -90,6 +105,7 @@ public class MessageActivity extends AppCompatActivity {
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                notify=true;
                 String msg = text_send.getText().toString();
                 if (!msg.equals("")) {
                     sendMessage(fuser.getUid(), userid, msg);
@@ -181,10 +197,61 @@ public class MessageActivity extends AppCompatActivity {
          });
 
 
+        final String msg = message;
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                if (notify){
+                sendNotification(receiver,user.getUsername(),msg);}
+                notify = false;
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
+private void sendNotification(String receiver, final String username, final String message){
+        DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
+    Query query = tokens.orderByKey().equalTo(receiver);
+    query.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            for (   DataSnapshot snapshot: dataSnapshot.getChildren()){
+                Token token = snapshot.getValue(Token.class);
+                Data data = new Data(fuser.getUid(),R.mipmap.ic_launcher,username+": "+message,"New Message",userid);
 
+                Sender sender = new Sender(data,token.getToken());
+
+                apiService.senndNotification(sender)
+                        .enqueue(new Callback<MyResponse>() {
+                            @Override
+                            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                                if(response.code()==200){
+                                    if(response.body().success==1){
+                                        Toast.makeText(MessageActivity.this,"Failed",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<MyResponse> call, Throwable t) {
+
+                            }
+                        });
+            }
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    });
+}
 
 
 

@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
 
-<service android:name=".Notifications.MyFirebaseMessaging"
+<service android:name=".Notifications.MyFirebaseIdService"
     android:enabled="true"
     android:exported="true"
     >
@@ -43,7 +43,7 @@
     </intent-filter>
 </service>
 
-        <service android:name=".Notifications.MyFirebaseIdService"
+        <service android:name=".Notifications.MyFirebaseMessaging"
             android:enabled="true"
             android:exported="true"
             >

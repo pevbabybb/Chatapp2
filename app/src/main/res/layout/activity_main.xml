@@ -12,29 +12,37 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chat App"
-        android:textSize="25sp"
-        android:textColor="#fff"
+        android:text="Welcome To"
+        android:textSize="50dp"
+        android:textColor="#ffffff"
         android:textStyle="bold"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chat App"
+        android:textSize="50dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        />
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:id="@+id/login"
         android:background="@color/colorPrimaryDark"
-        android:textColor="#fff"
-        android:text="Login"/>
+        android:textColor="#ffffff"
+        android:text="ALREADY HAVE ACCOUNT"/>
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/register"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="#fff"
+        android:background="#ff0000"
+        android:textColor="#ffffff"
         android:layout_marginTop="10dp"
 
-    android:text="Register"/>
+    android:text="NEED A NEW ACCOUNT?"/>
 
 
 

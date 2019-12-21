@@ -21,7 +21,8 @@
             android:layout_height="wrap_content"
             android:text="Create a new account"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="#000000"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
@@ -37,6 +38,7 @@
             android:id="@+id/email"
             android:layout_marginTop="10dp"
             app:met_floatingLabel="normal"
+            android:inputType="textEmailAddress"
             android:hint="Email"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -45,14 +47,15 @@
             android:id="@+id/password"
             android:layout_marginTop="10dp"
             app:met_floatingLabel="normal"
+            android:inputType="textPassword"
             android:hint="Password"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Register"
             android:id="@+id/btn_register"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="#fff"
+            android:background="#ff0000"
+            android:textColor="#000000"
             android:layout_margin="10dp"/>
 
     </LinearLayout>

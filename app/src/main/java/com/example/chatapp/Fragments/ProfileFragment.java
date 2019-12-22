@@ -16,12 +16,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.chatapp.Main2Activity;
+import com.example.chatapp.MainActivity;
 import com.example.chatapp.Model.User;
 import com.example.chatapp.R;
+import com.example.chatapp.StatusActivity;
 import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,6 +54,8 @@ public class ProfileFragment extends Fragment {
 
     CircleImageView image_profile;
     TextView username;
+    TextView mline_status;
+    Button mstatus_btn;
 
     DatabaseReference reference;
     FirebaseUser fuser;
@@ -68,6 +74,8 @@ public class ProfileFragment extends Fragment {
 
         image_profile = view.findViewById(R.id.profile_image);
         username = view.findViewById(R.id.username);
+        mline_status = view.findViewById(R.id.line_status);
+        mstatus_btn = view.findViewById(R.id.status_btn);
 
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
 
@@ -77,6 +85,7 @@ public class ProfileFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
                 if(user.getImage_URL() == null ||user.getImage_URL().equals("default")){
@@ -89,6 +98,14 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        mstatus_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            Intent status_intent = new Intent(getActivity(),StatusActivity.class);
+            startActivity(status_intent);
             }
         });
 
@@ -184,4 +201,5 @@ public class ProfileFragment extends Fragment {
             }
         }
     }
+
 }

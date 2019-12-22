@@ -112,6 +112,18 @@ public class Main2Activity extends AppCompatActivity {
                     startActivity(new Intent(Main2Activity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     return true;
             }
+
+            switch (item.getItemId()) {
+                case R.id.friends:
+                    startActivity(new Intent(Main2Activity.this, FriendsActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    return true;
+            }
+
+            switch (item.getItemId()) {
+                case R.id.request:
+                    startActivity(new Intent(Main2Activity.this, RequestsActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    return true;
+            }
             return false;
         } }
         class ViewPagerAdapter extends FragmentPagerAdapter {

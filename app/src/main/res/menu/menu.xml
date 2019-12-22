@@ -12,4 +12,12 @@
         android:title="Friends"
         app:showAsAction="never"
         />
+
+    <item
+        android:id="@+id/request"
+        android:title="Request"
+        app:showAsAction="never"
+        />
+
+
 </menu>

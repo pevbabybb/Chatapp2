@@ -1,4 +1,4 @@
-#ChatApp Project
+# ChatApp Project
 
 ## Group member :
 ### Trinh Hoang Nguyen - 16521755
